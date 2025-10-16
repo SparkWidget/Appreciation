@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+html, body, #__next { height: 100%; }
+
+.button-press { @apply active:scale-95 transition-transform hover:-translate-y-0.5; }
+.card-hover { @apply hover:shadow-lg transition-shadow; }
+
+/* Global hover for native buttons */
+button { @apply transition-colors transition-transform; }
+button:hover { @apply opacity-90 -translate-y-0.5; }
