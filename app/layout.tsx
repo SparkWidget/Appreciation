@@ -4,6 +4,8 @@ import { ReactNode } from 'react'
 import { Toaster } from '@/components/toaster'
 import { LangProvider } from '@/components/lang-context'
 import { RouteShell } from '@/components/route-shell'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: 'Appreciation – Send Gratitude Easily | Free SaaS Tool',
@@ -46,6 +48,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </RouteShell>
           <Toaster />
         </LangProvider>
+        <Analytics />
+        <SpeedInsights />
         <script
           dangerouslySetInnerHTML={{
             __html: `
