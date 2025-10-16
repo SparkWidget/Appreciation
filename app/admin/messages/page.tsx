@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
 
-export default async function AdminMessages({ searchParams }: { searchParams?: { username?: string; start?: string; end?: string } }) {
+export default async function AdminMessages({ searchParams }: { searchParams?: Promise<{ username?: string; start?: string; end?: string }> }) {
+  const params = (await searchParams) ?? {}
   const supabase = createClient(await cookies())
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return <div className="container py-16">Please sign in</div>
@@ -9,9 +10,9 @@ export default async function AdminMessages({ searchParams }: { searchParams?: {
   if (profile?.role !== 'admin') return <div className="container py-16">Not authorized</div>
 
   let query = supabase.from('appreciations').select('*').order('created_at', { ascending: false })
-  if (searchParams?.username) query = query.eq('username', searchParams.username)
-  if (searchParams?.start) query = query.gte('created_at', new Date(searchParams.start).toISOString())
-  if (searchParams?.end) query = query.lte('created_at', new Date(searchParams.end).toISOString())
+  if (params?.username) query = query.eq('username', params.username)
+  if (params?.start) query = query.gte('created_at', new Date(params.start).toISOString())
+  if (params?.end) query = query.lte('created_at', new Date(params.end).toISOString())
   const { data: messages } = await query
 
   return (
@@ -20,20 +21,20 @@ export default async function AdminMessages({ searchParams }: { searchParams?: {
       <form className="flex flex-wrap gap-2 items-end mb-4" method="get">
         <div>
           <label className="block text-xs text-gray-500">Username</label>
-          <input name="username" defaultValue={searchParams?.username || ''} className="border rounded px-2 py-1" />
+          <input name="username" defaultValue={params?.username || ''} className="border rounded px-2 py-1" />
         </div>
         <div>
           <label className="block text-xs text-gray-500">Start</label>
-          <input type="date" name="start" defaultValue={searchParams?.start || ''} className="border rounded px-2 py-1" />
+          <input type="date" name="start" defaultValue={params?.start || ''} className="border rounded px-2 py-1" />
         </div>
         <div>
           <label className="block text-xs text-gray-500">End</label>
-          <input type="date" name="end" defaultValue={searchParams?.end || ''} className="border rounded px-2 py-1" />
+          <input type="date" name="end" defaultValue={params?.end || ''} className="border rounded px-2 py-1" />
         </div>
         <button className="button-press bg-brand-600 text-white px-3 py-2 rounded">Filter</button>
         <a
           className="ml-auto underline text-sm"
-          href={`/api/admin/export?username=${encodeURIComponent(searchParams?.username || '')}&start=${encodeURIComponent(searchParams?.start || '')}&end=${encodeURIComponent(searchParams?.end || '')}`}
+          href={`/api/admin/export?username=${encodeURIComponent(params?.username || '')}&start=${encodeURIComponent(params?.start || '')}&end=${encodeURIComponent(params?.end || '')}`}
           target="_blank"
           rel="noopener noreferrer"
         >
