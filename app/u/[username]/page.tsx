@@ -2,8 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
 import { MessageForm } from '@/components/message-form'
 
-export default async function PublicUserPage({ params }: { params: { username: string } }) {
-  const { username } = params
+export default async function PublicUserPage({ params }: { params: Promise<{ username: string }> }) {
+  const { username } = await params
   // No auth required to leave a message
   return (
     <div className="container py-16 max-w-2xl">
