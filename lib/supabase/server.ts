@@ -1,7 +1,10 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
-import type { Cookies } from 'next/headers'
+type CookieStore = {
+  get: (name: string) => { value: string } | undefined
+  set: (options: { name: string; value: string } & CookieOptions) => void
+}
 
-export function createClient(cookies: Cookies) {
+export function createClient(cookies: CookieStore) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
   if (!supabaseUrl || !supabaseKey) throw new Error('Missing Supabase env vars')
