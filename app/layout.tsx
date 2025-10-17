@@ -8,21 +8,21 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
-  title: 'Appreciation – Send Gratitude Easily | Free SaaS Tool',
+  title: 'kindverse – Send Gratitude Easily | Free SaaS Tool',
   description:
-    'Appreciation is a free SaaS tool to share gratitude and track engagement. Empower your team or community with simple appreciation messages.',
+    'kindverse is a free SaaS tool to share gratitude and track engagement. Empower your team or community with simple appreciation messages.',
   openGraph: {
-    title: 'Appreciation – Share Gratitude Instantly',
+    title: 'kindverse – Share Gratitude Instantly',
     description:
       'Send and receive appreciation in seconds. Simple, free, and powerful.',
-    url: 'https://appreciation.yourdomain.com',
-    siteName: 'Appreciation',
+    url: 'https://kindverse.yourdomain.com',
+    siteName: 'kindverse',
     images: [
       {
-        url: 'https://appreciation.yourdomain.com/og-image.png',
+        url: 'https://kindverse.yourdomain.com/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Appreciation SaaS Preview',
+        alt: 'kindverse SaaS Preview',
       },
     ],
     locale: 'en_US',
@@ -30,10 +30,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Appreciation – Send Gratitude Instantly',
+    title: 'kindverse – Send Gratitude Instantly',
     description:
       'A free SaaS app for sharing appreciation and tracking engagement.',
-    images: ['https://appreciation.yourdomain.com/og-image.png'],
+    images: ['https://kindverse.yourdomain.com/og-image.png'],
     creator: '@your_twitter_handle',
   },
 }
@@ -73,29 +73,29 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'SoftwareApplication',
-              name: 'Appreciation',
+              name: 'kindverse',
               applicationCategory: 'ProductivityApplication',
               operatingSystem: 'Web',
               description:
-                'Appreciation is a free SaaS app to send, receive, and analyze gratitude messages within your team or community.',
+                'kindverse is a free SaaS app to send, receive, and analyze gratitude messages within your team or community.',
               offers: {
                 '@type': 'Offer',
                 price: '0',
                 priceCurrency: 'USD',
                 availability: 'https://schema.org/InStock',
               },
-              url: 'https://appreciation.yourdomain.com',
-              image: 'https://appreciation.yourdomain.com/og-image.png',
+              url: 'https://kindverse.yourdomain.com',
+              image: 'https://kindverse.yourdomain.com/og-image.png',
               author: {
                 '@type': 'Organization',
-                name: 'Appreciation',
+                name: 'kindverse',
               },
               publisher: {
                 '@type': 'Organization',
-                name: 'Appreciation',
+                name: 'kindverse',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://appreciation.yourdomain.com/logo.png',
+                  url: 'https://kindverse.yourdomain.com/logo.png',
                 },
               },
             }),

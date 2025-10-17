@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Appreciation',
+  title: 'Privacy Policy | kindverse',
   description:
-    'Read the Privacy Policy for Appreciation to understand what data we collect, how we use it, and your privacy choices.',
+    'Read the Privacy Policy for kindverse to understand what data we collect, how we use it, and your privacy choices.',
   openGraph: {
-    title: 'Privacy Policy | Appreciation',
+    title: 'Privacy Policy | kindverse',
     description:
-      'Learn how Appreciation protects your privacy and manages your data.',
-    url: 'https://appreciation.yourdomain.com/privacy',
-    images: [{ url: 'https://appreciation.yourdomain.com/og-image.png', width: 1200, height: 630 }],
+      'Learn how kindverse protects your privacy and manages your data.',
+    url: 'https://kindverse.yourdomain.com/privacy',
+    images: [{ url: 'https://kindverse.yourdomain.com/og-image.png', width: 1200, height: 630 }],
   },
 }
 

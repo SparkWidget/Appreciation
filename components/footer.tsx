@@ -12,7 +12,7 @@ export function Footer() {
           <div className="space-y-3">
             <div className="flex items-center gap-2 font-semibold text-gray-900">
               <Logo size={24} />
-              <span>Appreciation</span>
+              <span>kindverse</span>
             </div>
             <p className="text-sm text-gray-600 max-w-xs">Share and receive anonymous appreciation. Simple, privacy‑first, and fast.</p>
           </div>
@@ -40,7 +40,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 text-center text-xs text-gray-500 border-t pt-6" suppressHydrationWarning>
-          © {new Date().getFullYear()} Appreciation. All rights reserved.
+          © {new Date().getFullYear()} kindverse. All rights reserved.
         </div>
       </div>
     </footer>

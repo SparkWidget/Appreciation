@@ -30,7 +30,7 @@ export function Navbar() {
       <div className="container h-16 max-h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
           <Logo size={32} />
-          <span>Appreciation</span>
+          <span>kindverse</span>
         </Link>
         <nav className="flex items-center gap-2 text-sm">
           {email ? (

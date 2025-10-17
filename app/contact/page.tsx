@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact | Appreciation',
+  title: 'Contact | kindverse',
   description:
-    'Contact the Appreciation team with questions, feedback, partnership requests, or support needs.',
+    'Contact the kindverse team with questions, feedback, partnership requests, or support needs.',
   openGraph: {
-    title: 'Contact | Appreciation',
+    title: 'Contact | kindverse',
     description:
-      'Reach out to the Appreciation team for support and inquiries.',
-    url: 'https://appreciation.yourdomain.com/contact',
-    images: [{ url: 'https://appreciation.yourdomain.com/og-image.png', width: 1200, height: 630 }],
+      'Reach out to the kindverse team for support and inquiries.',
+    url: 'https://kindverse.yourdomain.com/contact',
+    images: [{ url: 'https://kindverse.yourdomain.com/og-image.png', width: 1200, height: 630 }],
   },
 }
 

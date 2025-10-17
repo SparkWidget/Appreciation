@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About | Appreciation',
+  title: 'About | kindverse',
   description:
-    'Learn about Appreciation, an anonymous appreciation board that helps teams and communities share gratitude and track engagement.',
+    'Learn about kindverse, an anonymous appreciation board that helps teams and communities share gratitude and track engagement.',
   openGraph: {
-    title: 'About Appreciation',
+    title: 'About kindverse',
     description:
-      'What is Appreciation? Discover our mission to make gratitude simple, safe, and impactful.',
-    url: 'https://appreciation.yourdomain.com/about',
-    images: [{ url: 'https://appreciation.yourdomain.com/og-image.png', width: 1200, height: 630 }],
+      'What is kindverse? Discover our mission to make gratitude simple, safe, and impactful.',
+    url: 'https://kindverse.yourdomain.com/about',
+    images: [{ url: 'https://kindverse.yourdomain.com/og-image.png', width: 1200, height: 630 }],
   },
 }
 
@@ -19,7 +19,7 @@ export default function AboutPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 via-white to-white" />
         <div className="container py-16 text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight">About Appreciation</h1>
+          <h1 className="text-4xl font-extrabold tracking-tight">About kindverse</h1>
           <p className="mt-3 text-gray-600 max-w-2xl mx-auto">A simple, free tool to send and receive anonymous, positive messages. Privacy-first, fast, and designed for teams and communities.</p>
         </div>
       </section>
