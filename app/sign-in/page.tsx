@@ -25,8 +25,17 @@ export default function SignInPage() {
         }
         throw error
       }
-      // Optionally sync profile (non-blocking)
-      fetch('/api/users/sync', { method: 'POST' }).catch(() => {})
+      // Ensure server has HTTP-only cookies by syncing session tokens (non-blocking)
+      try {
+        const at = data?.session?.access_token
+        const rt = data?.session?.refresh_token
+        await fetch('/api/users/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ access_token: at, refresh_token: rt }),
+        })
+      } catch {}
       let redirected = '/dashboard'
       try {
         const sp = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
