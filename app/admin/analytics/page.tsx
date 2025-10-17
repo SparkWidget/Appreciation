@@ -74,9 +74,15 @@ export default async function AnalyticsPage({ searchParams }: { searchParams?: P
   return (
     <div className="container py-10 space-y-8">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Analytics</h1>
-          <p className="text-sm text-gray-500">Manage users and appreciation data. View platform statistics.</p>
+        <div className="flex items-center gap-3">
+          <a href="/admin" className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border bg-white hover:bg-gray-50 text-sm font-semibold">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            Back
+          </a>
+          <div>
+            <h1 className="text-3xl font-bold">Analytics</h1>
+            <p className="text-sm text-gray-500">Manage users and appreciation data. View platform statistics.</p>
+          </div>
         </div>
       </div>
 
