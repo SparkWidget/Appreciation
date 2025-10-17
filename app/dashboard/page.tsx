@@ -48,8 +48,8 @@ export default function DashboardPage() {
         return
       }
       setEmail(user.email)
-      // ensure profile (non-blocking)
-      supabase.from('users').upsert({ email: user.email, name: user.user_metadata?.name || null, role: 'user' }, { onConflict: 'email' }).then(() => {})
+      // ensure profile (non-blocking) without mutating role
+      supabase.from('users').upsert({ email: user.email, name: user.user_metadata?.name || null }, { onConflict: 'email' }).then(() => {})
       // load profile
       const { data: profile } = await supabase.from('users').select('name, email, username, created_at, role, avatar_url').eq('email', user.email).maybeSingle()
       if (profile) {
@@ -151,7 +151,7 @@ export default function DashboardPage() {
               try {
                 const supabase = createClient()
                 // Update name in users table
-                const payload: any = { email: editEmail, name, role: 'user' }
+                const payload: any = { email: editEmail, name }
                 if (!usernameLocked) payload.username = username
                 const { error: upErr } = await supabase.from('users').upsert(payload, { onConflict: 'email' })
                 if (upErr) throw upErr
