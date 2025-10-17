@@ -32,7 +32,16 @@ export default function DashboardPage() {
   const PAGE_SIZE = 10
   const router = useRouter()
 
-  const shareUrl = useMemo(() => `${process.env.NEXT_PUBLIC_SITE_URL || ''}/u/${username || ''}` , [username])
+  const shareUrl = useMemo(() => {
+    let base = process.env.NEXT_PUBLIC_SITE_URL || ''
+    try {
+      const parsed = new URL(base)
+      base = parsed.origin
+    } catch {
+      if (typeof window !== 'undefined') base = window.location.origin
+    }
+    return `${base}/u/${username || ''}`
+  }, [username])
 
   useEffect(() => {
     const supabase = createClient()
