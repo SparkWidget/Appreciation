@@ -18,10 +18,9 @@ export default async function AnalyticsPage({ searchParams }: { searchParams?: P
   const startISO = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()).toISOString()
   const endISO = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 23, 59, 59, 999).toISOString()
 
-  // KPIs
-  const [{ count: totalUsersCount }] = await Promise.all([
-    supabase.from('users').select('*', { count: 'exact', head: true }),
-  ])
+  // KPIs: count users via row length to avoid count=null edge cases
+  const { data: usersAll } = await supabase.from('users').select('id')
+  const totalUsersCount = (usersAll || []).length
 
   // Messages in range (optionally by user)
   let msgsQuery = supabase.from('appreciations').select('id, created_at, username').gte('created_at', startISO).lte('created_at', endISO)
@@ -34,12 +33,12 @@ export default async function AnalyticsPage({ searchParams }: { searchParams?: P
   const { data: msgs90 } = await supabase.from('appreciations').select('username, created_at').gte('created_at', since90)
   const activeUsers90 = new Set((msgs90 || []).map(m => m.username)).size
 
-  const avgPerUser = totalUsersCount ? Number(totalMessages / totalUsersCount) : 0
+  const avgPerUser = totalUsersCount > 0 ? Number(totalMessages / totalUsersCount) : 0
   const kpis = {
-    total_users: totalUsersCount || 0,
-    total_messages: totalMessages,
-    active_users_90d: activeUsers90,
-    avg_messages_per_user: avgPerUser,
+    total_users: Number.isFinite(totalUsersCount) ? totalUsersCount : 0,
+    total_messages: Number.isFinite(totalMessages) ? totalMessages : 0,
+    active_users_90d: Number.isFinite(activeUsers90) ? activeUsers90 : 0,
+    avg_messages_per_user: Number.isFinite(avgPerUser) ? avgPerUser : 0,
   }
 
   // Daily messages chart (aggregate in Node)
