@@ -13,12 +13,24 @@ export default async function AdminIndex() {
   if (!isAdmin) return <div className="container py-16">Not authorized</div>
 
   return (
-    <div className="container py-10 space-y-4">
-      <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
-      <div className="grid sm:grid-cols-3 gap-4">
-        <Link href="/admin/analytics" className="border rounded p-6 card-hover">Analytics</Link>
-        <Link href="/admin/users" className="border rounded p-6 card-hover">Users</Link>
-        <Link href="/admin/messages" className="border rounded p-6 card-hover">Messages</Link>
+    <div className="container py-10 space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <p className="text-sm text-gray-500">Quick access to admin sections.</p>
+      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Link href="/admin/analytics" className="rounded-xl border bg-white p-6 shadow-sm hover:shadow transition card-hover">
+          <div className="text-lg font-semibold">Analytics</div>
+          <p className="text-sm text-gray-500 mt-1">Overview of platform activity.</p>
+        </Link>
+        <Link href="/admin/users" className="rounded-xl border bg-white p-6 shadow-sm hover:shadow transition card-hover">
+          <div className="text-lg font-semibold">Users</div>
+          <p className="text-sm text-gray-500 mt-1">Manage and review user profiles.</p>
+        </Link>
+        <Link href="/admin/messages" className="rounded-xl border bg-white p-6 shadow-sm hover:shadow transition card-hover">
+          <div className="text-lg font-semibold">Messages</div>
+          <p className="text-sm text-gray-500 mt-1">Browse recent appreciations.</p>
+        </Link>
       </div>
     </div>
   )
