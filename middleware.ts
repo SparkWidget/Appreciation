@@ -4,7 +4,14 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
   const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/')
   if (!isAdmin) return NextResponse.next()
-  // Let the /admin route render and gate access server-side in the page.
+  // Require Supabase cookies for admin area and redirect to sign-in preserving target
+  const hasToken = req.cookies.has('sb-access-token') || req.cookies.has('sb:access-token')
+  if (!hasToken) {
+    const url = req.nextUrl.clone()
+    url.pathname = '/sign-in'
+    url.searchParams.set('redirectedFrom', pathname)
+    return NextResponse.redirect(url)
+  }
   return NextResponse.next()
 }
 
