@@ -1,9 +1,7 @@
 import { cookies } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
 import { KPICards } from '@/components/analytics/kpi-cards'
-import dynamic from 'next/dynamic'
-const DailyMessagesChart = dynamic(() => import('@/components/analytics/daily-messages-chart').then(m => m.DailyMessagesChart), { ssr: false })
-const UserGrowthChart = dynamic(() => import('@/components/analytics/user-growth-chart').then(m => m.UserGrowthChart), { ssr: false })
+import { AnalyticsCharts } from '@/components/analytics/analytics-charts'
 
 export default async function AnalyticsPage({ searchParams }: { searchParams?: Promise<{ username?: string; start?: string; end?: string }> }) {
   const params = (await searchParams) ?? {}
@@ -106,10 +104,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams?: P
       </form>
 
       <KPICards data={kpis} />
-      <div className="grid lg:grid-cols-2 gap-6">
-        <DailyMessagesChart data={daily} />
-        <UserGrowthChart data={userGrowth} />
-      </div>
+      <AnalyticsCharts daily={daily} growth={userGrowth} />
     </div>
   )
 }
