@@ -16,36 +16,48 @@ export default async function AdminMessages({ searchParams }: { searchParams?: P
   const { data: messages } = await query
 
   return (
-    <div className="container py-10">
-      <h1 className="text-2xl font-semibold mb-4">All Appreciations</h1>
-      <form className="flex flex-wrap gap-2 items-end mb-4" method="get">
+    <div className="container py-10 space-y-6">
+      <div className="flex items-center justify-between">
         <div>
-          <label className="block text-xs text-gray-500">Username</label>
-          <input name="username" defaultValue={params?.username || ''} className="border rounded px-2 py-1" />
+          <h1 className="text-3xl font-bold">All Appreciations</h1>
+          <p className="text-sm text-gray-500">Review recent messages and filter by user or date.</p>
+        </div>
+        <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
+          <span className="inline-flex items-center gap-1 px-2 py-1 rounded border bg-white">Total <strong className="ml-1">{messages?.length ?? 0}</strong></span>
+        </div>
+      </div>
+
+      <form className="rounded-xl border bg-white p-4 shadow-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end" method="get">
+        <div className="sm:col-span-2">
+          <label className="block text-xs text-gray-500 mb-1">Username</label>
+          <input name="username" defaultValue={params?.username || ''} className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-200" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500">Start</label>
-          <input type="date" name="start" defaultValue={params?.start || ''} className="border rounded px-2 py-1" />
+          <label className="block text-xs text-gray-500 mb-1">Start</label>
+          <input type="date" name="start" defaultValue={params?.start || ''} className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-200" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500">End</label>
-          <input type="date" name="end" defaultValue={params?.end || ''} className="border rounded px-2 py-1" />
+          <label className="block text-xs text-gray-500 mb-1">End</label>
+          <input type="date" name="end" defaultValue={params?.end || ''} className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-200" />
         </div>
-        <button className="button-press bg-brand-600 text-white px-3 py-2 rounded">Filter</button>
-        <a
-          className="ml-auto underline text-sm"
-          href={`/api/admin/export?username=${encodeURIComponent(params?.username || '')}&start=${encodeURIComponent(params?.start || '')}&end=${encodeURIComponent(params?.end || '')}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Export CSV
-        </a>
+        <div className="flex gap-2 sm:col-span-2 lg:col-span-1">
+          <button className="button-press bg-brand-600 text-white px-3 py-2 rounded w-full sm:w-auto">Filter</button>
+          <a
+            className="px-3 py-2 rounded border bg-white hover:bg-gray-50 text-sm inline-flex items-center justify-center"
+            href={`/api/admin/export?username=${encodeURIComponent(params?.username || '')}&start=${encodeURIComponent(params?.start || '')}&end=${encodeURIComponent(params?.end || '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Export CSV
+          </a>
+        </div>
       </form>
+
       <div className="grid gap-3">
         {messages?.map((m) => (
-          <div key={m.id} className="border rounded p-4">
-            <div className="text-gray-900">{m.message}</div>
-            <div className="text-xs text-gray-500 mt-1">for @{m.username} • {new Date(m.created_at).toLocaleString()}</div>
+          <div key={m.id} className="rounded-xl border bg-white p-4 shadow-sm">
+            <div className="text-gray-900 leading-relaxed">{m.message}</div>
+            <div className="text-xs text-gray-500 mt-2">for <span className="font-medium">@{m.username}</span> • {new Date(m.created_at).toLocaleString()}</div>
           </div>
         ))}
       </div>
