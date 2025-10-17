@@ -4,14 +4,13 @@ import { createClient } from '@/lib/supabase/client'
 import { toast } from '@/components/toaster'
 import Link from 'next/link'
 import type { Route } from 'next'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function SignInPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,7 +27,11 @@ export default function SignInPage() {
       }
       // Optionally sync profile (non-blocking)
       fetch('/api/users/sync', { method: 'POST' }).catch(() => {})
-      const redirected = searchParams?.get('redirectedFrom') || '/dashboard'
+      let redirected = '/dashboard'
+      try {
+        const sp = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+        redirected = sp.get('redirectedFrom') || '/dashboard'
+      } catch {}
       router.replace(redirected as Route)
       setTimeout(() => { try { window.location.assign(redirected) } catch {} }, 50)
     } catch (err: any) {
