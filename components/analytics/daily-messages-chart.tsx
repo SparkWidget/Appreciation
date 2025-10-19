@@ -4,9 +4,12 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianG
 type Point = { day: string; messages_per_day: number }
 
 export function DailyMessagesChart({ data }: { data: Point[] }) {
-  const formatted = data.map(d => ({ ...d, day: new Date(d.day).toLocaleDateString() }))
+  let formatted = data.map(d => ({ ...d, day: new Date(d.day).toLocaleDateString() }))
+  if (!formatted.length) {
+    formatted = [{ day: new Date().toLocaleDateString(), messages_per_day: 0 }]
+  }
   return (
-    <div className="border rounded p-4 h-80 bg-white shadow-sm">
+    <div className="border rounded p-4 h-80 bg-white shadow-sm w-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={formatted}>
           <CartesianGrid strokeDasharray="3 3" />

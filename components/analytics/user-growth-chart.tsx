@@ -11,7 +11,7 @@ export function UserGrowthChart({ data }: { data: Point[] }) {
         <LineChart data={formatted}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="day" />
-          <YAxis allowDecimals={false} />
+          <YAxis allowDecimals={false} domain={[0, 'auto']} />
           <Tooltip />
           <Line type="monotone" dataKey="users" stroke="#22c55e" strokeWidth={2} dot={false} />
         </LineChart>
