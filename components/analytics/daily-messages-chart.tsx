@@ -1,5 +1,5 @@
 'use client'
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from 'recharts'
+import { Line, Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from 'recharts'
 
 type Point = { day: string; messages_per_day: number }
 
@@ -23,13 +23,14 @@ export function DailyMessagesChart({ data }: { data: Point[] }) {
   return (
     <div className="border rounded p-4 bg-white shadow-sm w-full" style={{ height: 320 }}>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={formatted}>
+        <AreaChart data={formatted} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis dataKey="day" stroke="#94a3b8" tick={{ fill: '#94a3b8', fontSize: 12 }} />
           <YAxis allowDecimals={false} domain={[0, (dataMax: number) => (dataMax <= 1 ? 1 : dataMax)]} stroke="#94a3b8" tick={{ fill: '#94a3b8', fontSize: 12 }} />
           <Tooltip />
-          <Line type="monotone" dataKey="messages_per_day" stroke="#6366f1" strokeWidth={2} dot={false} />
-        </LineChart>
+          <Area type="monotone" dataKey="messages_per_day" stroke="#6366f1" fill="#6366f1" fillOpacity={0.15} />
+          <Line type="monotone" dataKey="messages_per_day" stroke="#6366f1" strokeWidth={2} dot={{ r: 2, stroke: '#6366f1', fill: '#6366f1' }} activeDot={{ r: 4 }} />
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   )
