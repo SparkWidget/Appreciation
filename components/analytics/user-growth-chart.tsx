@@ -4,7 +4,10 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianG
 type Point = { day: string; users: number }
 
 export function UserGrowthChart({ data }: { data: Point[] }) {
-  const formatted = data.map(d => ({ ...d, day: new Date(d.day).toLocaleDateString() }))
+  let formatted = data.map(d => ({ ...d, day: new Date(d.day).toLocaleDateString() }))
+  if (!formatted.length) {
+    formatted = [{ day: new Date().toLocaleDateString(), users: 0 }]
+  }
   return (
     <div className="border rounded p-4 h-80 bg-white shadow-sm">
       <ResponsiveContainer width="100%" height="100%">
