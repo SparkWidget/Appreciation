@@ -8,6 +8,7 @@ type Growth = { day: string; users: number }
 
 export function AnalyticsCharts({ daily, growth }: { daily: Daily[]; growth: Growth[] }) {
   const [mounted, setMounted] = useState(false)
+  const [ready, setReady] = useState(false)
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -15,10 +16,11 @@ export function AnalyticsCharts({ daily, growth }: { daily: Daily[]; growth: Gro
     if (!mounted) return
     const id = setTimeout(() => {
       try { window.dispatchEvent(new Event('resize')) } catch {}
+      setReady(true)
     }, 50)
     return () => clearTimeout(id)
   }, [mounted])
-  if (!mounted) {
+  if (!mounted || !ready) {
     return (
       <div className="grid lg:grid-cols-2 gap-6 w-full">
         <div className="border rounded p-4 h-80 bg-white shadow-sm w-full" />

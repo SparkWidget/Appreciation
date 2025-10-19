@@ -14,7 +14,7 @@ export function DailyMessagesChart({ data }: { data: Point[] }) {
         <LineChart data={formatted}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="day" />
-          <YAxis allowDecimals={false} domain={[0, 'auto']} />
+          <YAxis allowDecimals={false} domain={[0, (dataMax: number) => (dataMax <= 1 ? 1 : dataMax)]} />
           <Tooltip />
           <Line type="monotone" dataKey="messages_per_day" stroke="#6366f1" strokeWidth={2} dot={false} />
         </LineChart>
