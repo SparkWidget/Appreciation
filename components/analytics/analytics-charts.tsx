@@ -20,11 +20,7 @@ export function AnalyticsCharts({ daily, growth }: { daily: Daily[]; growth: Gro
     }, 50)
     return () => clearTimeout(id)
   }, [mounted])
-  useEffect(() => {
-    if (ready) {
-      try { console.info('[AnalyticsCharts] daily points:', daily?.length || 0, 'growth points:', growth?.length || 0) } catch {}
-    }
-  }, [ready, daily, growth])
+  // debug logging removed
   if (!mounted || !ready) {
     return (
       <div className="grid lg:grid-cols-2 gap-6 w-full">
@@ -38,12 +34,10 @@ export function AnalyticsCharts({ daily, growth }: { daily: Daily[]; growth: Gro
       <div className="space-y-2">
         <div className="text-sm text-gray-600 font-medium">Daily Messages</div>
         <DailyMessagesChart data={daily} />
-        <div className="text-xs text-gray-400">Points: {daily?.length || 0}</div>
       </div>
       <div className="space-y-2">
         <div className="text-sm text-gray-600 font-medium">User Growth</div>
         <UserGrowthChart data={growth} />
-        <div className="text-xs text-gray-400">Points: {growth?.length || 0}</div>
       </div>
     </div>
   )
