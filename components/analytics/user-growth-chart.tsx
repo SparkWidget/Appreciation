@@ -9,7 +9,7 @@ export function UserGrowthChart({ data }: { data: Point[] }) {
     formatted = [{ day: new Date().toLocaleDateString(), users: 0 }]
   }
   return (
-    <div className="border rounded p-4 h-80 bg-white shadow-sm">
+    <div className="border rounded p-4 bg-white shadow-sm" style={{ height: 320 }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={formatted}>
           <CartesianGrid strokeDasharray="3 3" />

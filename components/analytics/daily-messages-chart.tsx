@@ -9,7 +9,7 @@ export function DailyMessagesChart({ data }: { data: Point[] }) {
     formatted = [{ day: new Date().toLocaleDateString(), messages_per_day: 0 }]
   }
   return (
-    <div className="border rounded p-4 h-80 bg-white shadow-sm w-full">
+    <div className="border rounded p-4 bg-white shadow-sm w-full" style={{ height: 320 }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={formatted}>
           <CartesianGrid strokeDasharray="3 3" />
